@@ -3,7 +3,10 @@ import React from "react";
 const NewItem = () => {
 	return (
 		<div>
-			<h2>New Item will be created here</h2>
+			{/* Header */}
+			{/* form */}
+			{/* footer */}
+			<h1>Then we move on</h1>
 		</div>
 	);
 };
