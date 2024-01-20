@@ -66,8 +66,20 @@ export const inventorySubMenu = [
 		href: "/inventory/inventory",
 	},
 	{
-		title: "Item Groups",
-		href: "/inventory/inventory/",
+		title: "Brands",
+		href: "/inventory/inventory/brands/new",
+	},
+	{
+		title: "Categories",
+		href: "/inventory/inventory/categories/new",
+	},
+	{
+		title: "Units",
+		href: "/inventory/inventory/units/new",
+	},
+	{
+		title: "Warehouse",
+		href: "/inventory/inventory/warehouse/new",
 	},
 	{
 		title: "Inventory Adjustments",
@@ -118,37 +130,44 @@ export const itemCardOptions = [
 		title: "Item ",
 		description:
 			"Create standalone items and sercives that you buy and sell",
-		link: "#",
+		link: "/inventory/inventory/items/new",
+
 		linkTitle: "New Item",
 		enabled: true,
 		icon: Shirt,
 	},
 	{
-		title: "Item Groups",
-		description:
-			"Create multiple variant of the same item using the same Item Group",
-		link: "/new",
-		linkTitle: "New Item Group",
+		title: "Units",
+		description: "Unit, of measurement of the product and services",
+		link: "/inventory/inventory/units/new",
+		linkTitle: "New Unit",
 		enabled: true,
 		icon: Boxes,
 	},
 
 	{
-		title: "Composite Items ",
-		description: "Bundle different items together and sell them as kits",
-		link: "#",
-		linkTitle: "New Composite Item",
+		title: "Brands ",
+		description: "Brands of different items. ",
+		link: "/inventory/inventory/brands/new",
+		linkTitle: "New Brand",
 		enabled: true,
 		icon: Component,
 	},
 
 	{
-		title: "Price List ",
-		description:
-			"Tweak your item price for spcific contacts or transactions",
-		link: "#",
-		linkTitle: "New  Price List",
-		enabled: false,
+		title: "Warehouse",
+		description: "Diffent wwrehouses that house diffenet products",
+		link: "/inventory/inventory/warehouse/new",
+		linkTitle: "New  Warehouse",
+		enabled: true,
+		icon: ScrollText,
+	},
+	{
+		title: "Category",
+		description: "Categories of products",
+		link: "/inventory/inventory/categories/new",
+		linkTitle: "New  Category",
+		enabled: true,
 		icon: ScrollText,
 	},
 ];

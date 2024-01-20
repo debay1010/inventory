@@ -4,7 +4,7 @@ import React from "react";
 const SearchInput = () => {
 	return (
 		<form>
-			<label for="simple-search" className="sr-only">
+			<label htmlFor="simple-search" className="sr-only">
 				Search
 			</label>
 			<div className="relative w-full">

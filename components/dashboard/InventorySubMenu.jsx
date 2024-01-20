@@ -10,13 +10,14 @@ const InventorySubMenu = () => {
 	const pathname = usePathname();
 	return (
 		<div className="flex flex-col  gap-4">
-			{inventorySubMenu.map((menu) => (
+			{inventorySubMenu.map((menu, index) => (
 				<div className="">
 					<Link
 						className={`flex justify-between items-center ${
 							pathname === menu.href ? "bg-blue-600" : ""
 						} hover:bg-slate-900 py-2 pl-8 transition-all duration-300 rounded-md`}
-						key={menu.title}
+						// key={menu.title}
+						key={index}
 						href={menu.href}
 						// onMouseEnter={(e) => setStyle(" focus:hover:block")}
 						// onMouseLeave={(e) => setStyle("hidden")}
