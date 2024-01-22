@@ -83,7 +83,7 @@ export const inventorySubMenu = [
 	},
 	{
 		title: "Inventory Adjustments",
-		href: "/inventory/inventory/adjustments",
+		href: "/inventory/inventory/adjustments/new",
 	},
 ];
 export const salesSubMenu = [
@@ -129,7 +129,7 @@ export const itemCardOptions = [
 	{
 		title: "Item ",
 		description:
-			"Create standalone items and sercives that you buy and sell",
+			"Create standalone items and services that you buy and sell",
 		link: "/inventory/inventory/items/new",
 
 		linkTitle: "New Item",
@@ -156,7 +156,7 @@ export const itemCardOptions = [
 
 	{
 		title: "Warehouse",
-		description: "Diffent wwrehouses that house diffenet products",
+		description: "Different warehouses that house different products",
 		link: "/inventory/inventory/warehouse/new",
 		linkTitle: "New  Warehouse",
 		enabled: true,
@@ -169,5 +169,94 @@ export const itemCardOptions = [
 		linkTitle: "New  Category",
 		enabled: true,
 		icon: ScrollText,
+	},
+	{
+		title: "Adjustment",
+		description: "Adjust or Transfer Stock from a warehouse to another",
+		link: "/inventory/inventory/adjustments/new",
+		linkTitle: "Transfer/Adjust Stock",
+		enabled: true,
+		icon: ScrollText,
+	},
+];
+
+export const warehouseTypeOptions = [
+	{
+		label: "Main",
+		value: "main",
+	},
+	{
+		label: "Branch",
+		value: "branch",
+	},
+];
+export const itemCategories = [
+	{
+		label: "Electronics",
+		value: "weeyt364638wwoei",
+	},
+	{
+		label: "Clothing",
+		value: "eeeur903848kkdjh",
+	},
+	{
+		label: "Automobile",
+		value: "ytyt333445llkuug",
+	},
+];
+export const itemUnits = [
+	{
+		label: "Kg",
+		value: "wddyt4553438wwoei",
+	},
+	{
+		label: "Pcs",
+		value: "eeerr903848oiuejh",
+	},
+	{
+		label: "ft",
+		value: "cvqw987446lsdcxg",
+	},
+];
+export const itemBrands = [
+	{
+		label: "HP",
+		value: "wUCU4553438wwoei",
+	},
+	{
+		label: "Dell",
+		value: "eeerr903848ocdsjh",
+	},
+	{
+		label: "Microsoft",
+		value: "ssd233446lsdfgv",
+	},
+];
+export const itemWarehouse = [
+	{
+		label: "Warehouse A",
+		value: "wUCU4551118wwoei",
+	},
+	{
+		label: "DeWarehouse B",
+		value: "eeerr92222ocdsjh",
+	},
+	{
+		label: "Warehouse C",
+		value: "ssd8888877sdfgv",
+	},
+];
+export const itemSupplier = [
+	{
+		label: "Supplier A",
+		value: "wUCU4551118wwoei",
+	},
+	{
+		label: "Supplier B",
+		value: "eeerr92222ocdsjh",
+	},
+	{
+		label: "Supplier C",
+		value: "ssd8888877sdfgv",
 	},
 ];

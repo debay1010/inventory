@@ -10,7 +10,7 @@ const Inventory = () => {
 	return (
 		<div>
 			<FixedInventoryHeader newLink="/inventory/inventory/items/new" />
-			<div className="grid grid-col-1 lg:grid-cols-2 m-5 p-8 px-16 py-8 gap-6 rounded">
+			<div className="grid grid-col-1 lg:grid-cols-3 md:grid-cols-2 m-5 p-8 px-16 py-8 gap-6 rounded">
 				{itemCardOptions.map((card, index) => (
 					<OptionCard key={index} optionData={card} />
 				))}

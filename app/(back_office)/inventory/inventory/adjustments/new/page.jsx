@@ -9,7 +9,7 @@ import { warehouseTypeOptions } from "@/constants";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const NewWarehouse = () => {
+const NewAdjustment = () => {
 	const [loading, setLoading] = useState(false);
 	const {
 		register,
@@ -24,7 +24,7 @@ const NewWarehouse = () => {
 		setLoading(true);
 		const baseUrl = "http://localhost:3000";
 		try {
-			const response = await fetch(`${baseUrl}/api/warehouse`, {
+			const response = await fetch(`${baseUrl}/api/adjustments`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -45,46 +45,40 @@ const NewWarehouse = () => {
 	return (
 		<div className="">
 			{/* Header */}
-			<FormHeader title="New Warehouse" href="/inventory/inventory" />
+			<FormHeader title="Stock Adjustment" href="/inventory/inventory" />
 			{/* forms */}
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className=" my-6 w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto"
 			>
 				<div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+					<TextInput
+						label="Enter Amount of Stock to Transfer"
+						name="transferStockQty"
+						type="number"
+						register={register}
+						errors={errors}
+						className="w-full"
+					/>
 					<SelectInput
 						register={register}
 						className="w-full"
 						options={warehouseTypeOptions}
-						name="type"
-						label="Select Warehouse Type"
-					/>
-
-					<TextInput
-						label="Warehouse Name"
-						name="title"
-						register={register}
-						errors={errors}
-						className="w-full"
-					/>
-					<TextInput
-						label="Warehouse Location"
-						name="location"
-						register={register}
-						errors={errors}
+						name="receivingBranchId"
+						label="Select the branch that will receive the stock"
 					/>
 
 					<TextareaInput
-						label="Warehouse Description"
-						name="description"
+						label="Stock Adjustment Notes"
+						name="notes"
 						register={register}
 						errors={errors}
 					/>
 				</div>
-				<SubmitButton isLoading={loading} title="Warehouse" />
+				<SubmitButton isLoading={loading} title="Adjustment/Transfer" />
 			</form>
 		</div>
 	);
 };
 
-export default NewWarehouse;
+export default NewAdjustment;
