@@ -19,10 +19,17 @@ import InventorySubMenu from "./InventorySubMenu";
 import SidebarDropDownLink from "./SidebarDropDownLink";
 import { salesSubMenu } from "@/constants";
 
-const Sidebar = () => {
+const Sidebar = ({ showSidebar, setShowSidebar }) => {
 	const [hideInventorySubMenu, setHideInventorySubMenu] = useState(false);
+	// console.log(showSidebar);
 	return (
-		<div className="  flex flex-col justify-between w-60 min-h-screen text-slate-50 bg-slate-800 fixed">
+		<div
+			className={`${
+				showSidebar
+					? "w-60 min-h-screen text-slate-50 bg-slate-800 fixed md:block"
+					: "w-60 min-h-screen text-slate-50 bg-slate-800 fixed hidden md:block"
+			} z-50`}
+		>
 			<div className="flex flex-col  ">
 				<Link href="#">
 					<div className=" bg-slate-950 flex space-x-2 py-3 px-2 ">
@@ -33,7 +40,7 @@ const Sidebar = () => {
 				{/* links */}
 				<nav className="flex flex-col gap-4 py-6 px-3">
 					<Link
-						href="/inventory/home"
+						href="/inventory/home/dashboard"
 						className="flex gap-2 items-center bg-blue-500 text-slate-300 p-2  rounded-md"
 					>
 						<Home className="w-4 h-4" />
@@ -62,11 +69,14 @@ const Sidebar = () => {
 							)}
 						</div>
 					</Link>
-					{hideInventorySubMenu && <InventorySubMenu />}
+					{hideInventorySubMenu && (
+						<InventorySubMenu setShowSidebar={setShowSidebar} />
+					)}
 
 					<SidebarDropDownLink
 						heading="Sales"
 						subMenuLinks={salesSubMenu}
+						setShowSidebar={setShowSidebar}
 					/>
 
 					{/* <button

@@ -3,12 +3,13 @@ import FormHeader from "@/components/dashboard/FormHeader";
 import SubmitButton from "@/components/formInputs/SubmitButton";
 import TextInput from "@/components/formInputs/TextInput";
 import TextareaInput from "@/components/formInputs/TextareaInput";
-import { Plus, X } from "lucide-react";
-import Link from "next/link";
+import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const NewCategory = () => {
+const NewCategory = ({ initialData = {}, isUpdate = false }) => {
 	const [loading, setLoading] = useState(false);
 	const {
 		register,
@@ -16,35 +17,42 @@ const NewCategory = () => {
 		watch,
 		reset,
 		formState: { errors },
-	} = useForm();
+	} = useForm({ defaultValues: initialData });
 
+	const router = useRouter();
 	async function onSubmit(data) {
+		function redirect() {
+			router.push("/inventory/inventory/categories");
+		}
 		console.log(data);
-		setLoading(true);
-		const baseUrl = "http://localhost:3000";
-		try {
-			const response = await fetch(`${baseUrl}/api/categories`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(data),
-			});
-			if (response.ok) {
-				setLoading(false);
-				console.log(response);
-				reset();
-			}
-		} catch (error) {
-			setLoading(false);
-			console.log(error);
+
+		if (isUpdate) {
+			makePutRequest(
+				setLoading,
+				`api/categories/${initialData.id}`,
+				data,
+				"Category",
+				redirect,
+				reset
+			);
+		} else {
+			makePostRequest(
+				setLoading,
+				"api/categories",
+				data,
+				"Category",
+				reset
+			);
 		}
 	}
 
 	return (
 		<div className="">
 			{/* Header */}
-			<FormHeader title="New Category" href="/inventory/inventory" />
+			<FormHeader
+				title={isUpdate ? "Update Category" : "New Category"}
+				href="/inventory/inventory/categories"
+			/>
 			{/* forms */}
 			<form
 				onSubmit={handleSubmit(onSubmit)}
@@ -89,7 +97,10 @@ const NewCategory = () => {
 						</div>
 					</div> */}
 				</div>
-				<SubmitButton isLoading={loading} title="Category" />
+				<SubmitButton
+					isLoading={loading}
+					title={isUpdate ? "Updated Category" : "New Category"}
+				/>
 			</form>
 		</div>
 	);

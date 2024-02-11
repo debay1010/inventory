@@ -10,11 +10,11 @@ import {
 import Link from "next/link";
 import React from "react";
 
-const FixedInventoryHeader = ({ newLink }) => {
+const FixedInventoryHeader = ({ title, newLink }) => {
 	return (
 		<div className="flex justify-between items-center  bg-white py-6 px-4">
 			<button className="text-2xl flex justify-between items-center">
-				<span>All Items</span>
+				<span> {title} </span>
 				<ChevronRight />
 			</button>
 

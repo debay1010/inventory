@@ -4,12 +4,14 @@ import SelectInput from "@/components/formInputs/SelectInput";
 import SubmitButton from "@/components/formInputs/SubmitButton";
 import TextInput from "@/components/formInputs/TextInput";
 import TextareaInput from "@/components/formInputs/TextareaInput";
-import { warehouseTypeOptions } from "@/constants";
+import { warehouseCategory } from "@/constants";
+import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
+import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const NewWarehouse = () => {
+const NewWarehouse = ({ initialData = {}, isUpdate = false }) => {
 	const [loading, setLoading] = useState(false);
 	const {
 		register,
@@ -17,35 +19,49 @@ const NewWarehouse = () => {
 		watch,
 		reset,
 		formState: { errors },
-	} = useForm();
+	} = useForm({ defaultValues: initialData });
 
+	// async function onSubmit(data) {
+	// 	console.log(data);
+	// 	setLoading(true);
+
+	// 	makePostRequest(setLoading, "api/warehouse", data, "Warehouse", reset);
+	// }
+
+	const router = useRouter();
 	async function onSubmit(data) {
+		function redirect() {
+			router.push("/inventory/inventory/warehouse");
+		}
 		console.log(data);
-		setLoading(true);
-		const baseUrl = "http://localhost:3000";
-		try {
-			const response = await fetch(`${baseUrl}/api/warehouse`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(data),
-			});
-			if (response.ok) {
-				setLoading(false);
-				console.log(response);
-				reset();
-			}
-		} catch (error) {
-			setLoading(false);
-			console.log(error);
+
+		if (isUpdate) {
+			makePutRequest(
+				setLoading,
+				`api/warehouse/${initialData.id}`,
+				data,
+				"Warehouse",
+				redirect,
+				reset
+			);
+		} else {
+			makePostRequest(
+				setLoading,
+				"api/warehouse",
+				data,
+				"Warehouse",
+				reset
+			);
 		}
 	}
 
 	return (
 		<div className="">
 			{/* Header */}
-			<FormHeader title="New Warehouse" href="/inventory/inventory" />
+			<FormHeader
+				title={isUpdate ? "Update Warehouse" : "New Warehouse"}
+				href="/inventory/inventory/warehouse/"
+			/>
 			{/* forms */}
 			<form
 				onSubmit={handleSubmit(onSubmit)}
@@ -55,7 +71,7 @@ const NewWarehouse = () => {
 					<SelectInput
 						register={register}
 						className="w-full"
-						options={warehouseTypeOptions}
+						options={warehouseCategory}
 						name="type"
 						label="Select Warehouse Type"
 					/>
@@ -81,7 +97,10 @@ const NewWarehouse = () => {
 						errors={errors}
 					/>
 				</div>
-				<SubmitButton isLoading={loading} title="Warehouse" />
+				<SubmitButton
+					isLoading={loading}
+					title={isUpdate ? "Updated Warehouse" : "New Warehouse"}
+				/>
 			</form>
 		</div>
 	);

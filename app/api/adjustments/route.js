@@ -10,7 +10,7 @@ export async function POST(request) {
 		return NextResponse.json(adjustment);
 	} catch (error) {
 		console.log(error);
-		return NextResponse(
+		return NextResponse.json(
 			{ error, message: "Fail to create adjustment" },
 			{ status: 500 }
 		);

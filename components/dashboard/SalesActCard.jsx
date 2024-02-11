@@ -8,7 +8,7 @@ const SalesActCard = ({ item }) => {
 				<h2 className={`${item.color} font-semibold text-4xl`}>
 					{item.number}
 				</h2>
-				<p className=" text-slate-500 text-sm">{item.unit}</p>
+				{/* <p className=" text-slate-500 text-sm">{item.unit}</p> */}
 				<div className=" flex space-x-2">
 					<CheckCircle2 className="w-3 h-3" />
 					<p className="text-slate-500  text-xs">{item.title}</p>

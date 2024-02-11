@@ -3,12 +3,15 @@ import FormHeader from "@/components/dashboard/FormHeader";
 import SubmitButton from "@/components/formInputs/SubmitButton";
 import TextInput from "@/components/formInputs/TextInput";
 import TextareaInput from "@/components/formInputs/TextareaInput";
+import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import { Plus, X } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
-const NewBrand = () => {
+const NewBrand = ({ initialData = {}, isUpdate = false }) => {
 	const [loading, setLoading] = useState(false);
 	const {
 		register,
@@ -16,35 +19,36 @@ const NewBrand = () => {
 		watch,
 		reset,
 		formState: { errors },
-	} = useForm();
+	} = useForm({ defaultValues: initialData });
 
+	const router = useRouter();
 	async function onSubmit(data) {
+		function redirect() {
+			router.push("/inventory/inventory/brands");
+		}
 		console.log(data);
-		setLoading(true);
-		const baseUrl = "http://localhost:3000";
-		try {
-			const response = await fetch(`${baseUrl}/api/brands`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(data),
-			});
-			if (response.ok) {
-				setLoading(false);
-				console.log(response);
-				reset();
-			}
-		} catch (error) {
-			setLoading(false);
-			console.log(error);
+
+		if (isUpdate) {
+			makePutRequest(
+				setLoading,
+				`api/brands/${initialData.id}`,
+				data,
+				"Brand",
+				redirect,
+				reset
+			);
+		} else {
+			makePostRequest(setLoading, "api/brands", data, "Brand", reset);
 		}
 	}
 
 	return (
 		<div className="">
 			{/* Header */}
-			<FormHeader title="New Brand" href="/inventory/inventory" />
+			<FormHeader
+				title={isUpdate ? "Update Brand" : "New Brand"}
+				href="/inventory/inventory/brands"
+			/>
 			{/* forms */}
 			<form
 				onSubmit={handleSubmit(onSubmit)}
@@ -59,7 +63,10 @@ const NewBrand = () => {
 						className="w-full"
 					/>
 				</div>
-				<SubmitButton isLoading={loading} title="Brand" />
+				<SubmitButton
+					isLoading={loading}
+					title={isUpdate ? " Updated Brand " : " New Brand"}
+				/>
 			</form>
 		</div>
 	);

@@ -8,7 +8,7 @@ import { PlusCircle, ShoppingBasket } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const SidebarDropDownLink = ({ heading, subMenuLinks }) => {
+const SidebarDropDownLink = ({ heading, subMenuLinks, setShowSidebar }) => {
 	const pathname = usePathname();
 	return (
 		<Link href="/inventory/sales">
@@ -21,6 +21,7 @@ const SidebarDropDownLink = ({ heading, subMenuLinks }) => {
 					<CollapsibleContent>
 						{subMenuLinks.map((menu) => (
 							<Link
+								onClick={() => setShowSidebar((prev) => !prev)}
 								className={`flex justify-between items-center ${
 									pathname === menu.href ? "bg-blue-600" : ""
 								} hover:bg-slate-900 py-2 pl-8 transition-all duration-300 rounded-md`}

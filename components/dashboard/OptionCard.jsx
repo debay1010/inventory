@@ -16,7 +16,7 @@ const OptionCard = ({ optionData }) => {
 		<div className="shadow-md bg-white flex flex-col items-center justify-center gap-4 p-6">
 			<h2 className="text-2xl font-semibold">{title}</h2>
 			<div className="">
-				<Icon strokeWidth={0.5} className="h-32 w-32" />
+				<Icon strokeWidth={0.5} className="h-28 w-28" />
 			</div>
 			<p className="line-clamp-1">{description}</p>
 

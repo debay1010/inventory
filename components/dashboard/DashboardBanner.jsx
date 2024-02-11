@@ -9,11 +9,11 @@ const DashboardBanner = () => {
 			className={`${
 				hidden
 					? "hidden"
-					: "flex justify-between items-center bg-white px-8 py-6 relative"
+					: " hidden lg:flex justify-between items-center bg-white px-8 py-6 relative"
 			}`}
 		>
 			{/* Icon */}
-			<CreditCard className="h-20 w-20 text-slate-500" />
+			<CreditCard className="h-20 w-20 text-slate-500 " />
 			{/* Text */}
 			<div className=" flex flex-col w-[60%] px-2 ">
 				<h1 className="text-xl font-semibold">

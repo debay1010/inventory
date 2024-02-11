@@ -7,9 +7,9 @@ const FormHeader = ({ title, href }) => {
 		<div className="flex justify-between i tems-center bg-white py-3 px-8">
 			<h2 className="text-xl font-semibold">{title}</h2>
 
-			<Link href={href}>
+			<a href={href}>
 				<X />
-			</Link>
+			</a>
 		</div>
 	);
 };

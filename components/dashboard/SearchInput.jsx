@@ -3,7 +3,7 @@ import React from "react";
 
 const SearchInput = () => {
 	return (
-		<form>
+		<form className="hidden md:block">
 			<label htmlFor="simple-search" className="sr-only">
 				Search
 			</label>

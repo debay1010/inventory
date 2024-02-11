@@ -1,5 +1,17 @@
 "use client";
-import { Boxes, Component, ScrollText, Shirt } from "lucide-react";
+import {
+	AlignVerticalJustifyEnd,
+	ArrowRightLeft,
+	Boxes,
+	Component,
+	Diff,
+	Hexagon,
+	Layers3,
+	PersonStanding,
+	Scale,
+	SquarePen,
+	Warehouse,
+} from "lucide-react";
 
 export const dbNavLinks = [
 	{
@@ -63,29 +75,34 @@ export const inventorySummary = [
 export const inventorySubMenu = [
 	{
 		title: "Items",
-		href: "/inventory/inventory",
+		href: "/inventory/inventory/items",
 	},
 	{
 		title: "Brands",
-		href: "/inventory/inventory/brands/new",
+		href: "/inventory/inventory/brands",
 	},
 	{
 		title: "Categories",
-		href: "/inventory/inventory/categories/new",
+		href: "/inventory/inventory/categories",
 	},
 	{
 		title: "Units",
-		href: "/inventory/inventory/units/new",
+		href: "/inventory/inventory/units",
 	},
 	{
 		title: "Warehouse",
-		href: "/inventory/inventory/warehouse/new",
+		href: "/inventory/inventory/warehouse",
 	},
 	{
 		title: "Inventory Adjustments",
-		href: "/inventory/inventory/adjustments/new",
+		href: "/inventory/inventory/adjustments",
+	},
+	{
+		title: "Supplier",
+		href: "/inventory/inventory/suppliers",
 	},
 ];
+
 export const salesSubMenu = [
 	{
 		title: "Credit Notes",
@@ -134,7 +151,7 @@ export const itemCardOptions = [
 
 		linkTitle: "New Item",
 		enabled: true,
-		icon: Shirt,
+		icon: AlignVerticalJustifyEnd,
 	},
 	{
 		title: "Units",
@@ -142,7 +159,7 @@ export const itemCardOptions = [
 		link: "/inventory/inventory/units/new",
 		linkTitle: "New Unit",
 		enabled: true,
-		icon: Boxes,
+		icon: Scale,
 	},
 
 	{
@@ -151,7 +168,7 @@ export const itemCardOptions = [
 		link: "/inventory/inventory/brands/new",
 		linkTitle: "New Brand",
 		enabled: true,
-		icon: Component,
+		icon: Hexagon,
 	},
 
 	{
@@ -160,7 +177,7 @@ export const itemCardOptions = [
 		link: "/inventory/inventory/warehouse/new",
 		linkTitle: "New  Warehouse",
 		enabled: true,
-		icon: ScrollText,
+		icon: Warehouse,
 	},
 	{
 		title: "Category",
@@ -168,7 +185,7 @@ export const itemCardOptions = [
 		link: "/inventory/inventory/categories/new",
 		linkTitle: "New  Category",
 		enabled: true,
-		icon: ScrollText,
+		icon: Layers3,
 	},
 	{
 		title: "Adjustment",
@@ -176,7 +193,15 @@ export const itemCardOptions = [
 		link: "/inventory/inventory/adjustments/new",
 		linkTitle: "Transfer/Adjust Stock",
 		enabled: true,
-		icon: ScrollText,
+		icon: SquarePen,
+	},
+	{
+		title: "Supplier",
+		description: "Add supplier to the system",
+		link: "/inventory/inventory/suppliers/new",
+		linkTitle: "Create Supplier",
+		enabled: true,
+		icon: PersonStanding,
 	},
 ];
 
@@ -186,38 +211,53 @@ export const warehouseTypeOptions = [
 		value: "main",
 	},
 	{
-		label: "Branch",
-		value: "branch",
+		label: "Branch  A",
+		value: "branchA",
+	},
+	{
+		label: "Branch B",
+		value: "branchB",
+	},
+	{
+		label: "Branch C",
+		value: "branchC",
+	},
+	{
+		label: "Branch D",
+		value: "branchD",
 	},
 ];
-export const itemCategories = [
-	{
-		label: "Electronics",
-		value: "weeyt364638wwoei",
-	},
-	{
-		label: "Clothing",
-		value: "eeeur903848kkdjh",
-	},
-	{
-		label: "Automobile",
-		value: "ytyt333445llkuug",
-	},
-];
-export const itemUnits = [
-	{
-		label: "Kg",
-		value: "wddyt4553438wwoei",
-	},
-	{
-		label: "Pcs",
-		value: "eeerr903848oiuejh",
-	},
-	{
-		label: "ft",
-		value: "cvqw987446lsdcxg",
-	},
-];
+
+// export const itemCategories = [
+// 	{
+// 		label: "Electronics",
+// 		value: "weeyt364638wwoei",
+// 	},
+// 	{
+// 		label: "Clothing",
+// 		value: "eeeur903848kkdjh",
+// 	},
+// 	{
+// 		label: "Automobile",
+// 		value: "ytyt333445llkuug",
+// 	},
+// ];
+
+// export const itemUnits = [
+// 	{
+// 		label: "Kg",
+// 		value: "wddyt4553438wwoei",
+// 	},
+// 	{
+// 		label: "Pcs",
+// 		value: "eeerr903848oiuejh",
+// 	},
+// 	{
+// 		label: "ft",
+// 		value: "cvqw987446lsdcxg",
+// 	},
+// ];
+
 export const itemBrands = [
 	{
 		label: "HP",
@@ -232,6 +272,7 @@ export const itemBrands = [
 		value: "ssd233446lsdfgv",
 	},
 ];
+
 export const itemWarehouse = [
 	{
 		label: "Warehouse A",
@@ -246,6 +287,7 @@ export const itemWarehouse = [
 		value: "ssd8888877sdfgv",
 	},
 ];
+
 export const itemSupplier = [
 	{
 		label: "Supplier A",
@@ -258,5 +300,48 @@ export const itemSupplier = [
 	{
 		label: "Supplier C",
 		value: "ssd8888877sdfgv",
+	},
+];
+
+export const warehouseAdjustmentTabs = [
+	{
+		title: "Adjust Stock",
+		icon: Diff,
+		form: "add",
+	},
+	{
+		title: "Transfer Stock",
+		icon: ArrowRightLeft,
+		form: "transfer",
+	},
+];
+
+export const warehouseCategory = [
+	{
+		title: "Main",
+		id: "main",
+	},
+	{
+		title: "Branch",
+		id: "branch",
+	},
+];
+
+export const dummyItems = [
+	{
+		label: "Item 1",
+		value: "item1",
+	},
+	{
+		label: "Item 2",
+		value: "item2",
+	},
+	{
+		label: "Item 3",
+		value: "item3",
+	},
+	{
+		label: "Item 4",
+		value: "item4",
 	},
 ];

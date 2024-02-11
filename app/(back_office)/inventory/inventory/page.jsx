@@ -9,8 +9,11 @@ import OptionCard from "@/components/dashboard/OptionCard";
 const Inventory = () => {
 	return (
 		<div>
-			<FixedInventoryHeader newLink="/inventory/inventory/items/new" />
-			<div className="grid grid-col-1 lg:grid-cols-3 md:grid-cols-2 m-5 p-8 px-16 py-8 gap-6 rounded">
+			<FixedInventoryHeader
+				title="All Items"
+				newLink="/inventory/inventory/items/new"
+			/>
+			<div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3  m-5 p-8 px-16 py-8 gap-6 rounded">
 				{itemCardOptions.map((card, index) => (
 					<OptionCard key={index} optionData={card} />
 				))}

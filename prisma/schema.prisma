@@ -1,0 +1,155 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Item {
+  id                       String                    @id @default(auto()) @map("_id") @db.ObjectId
+  title                    String
+  category                 Category                  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId               String                    @db.ObjectId
+  sku                      String                    @unique
+  barcode                  String?
+  qty                      Int
+  unit                     Unit                      @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  unitId                   String                    @db.ObjectId
+  brand                    Brand                     @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  brandId                  String                    @db.ObjectId
+  buyingPrice              Float
+  sellingPrice             Float
+  supplier                 Supplier                  @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  supplierId               String                    @db.ObjectId
+  reOrderPoint             String
+  warehouse                Warehouse                 @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  warehouseId              String                    @db.ObjectId
+  weight                   Float?
+  dimensions               String?
+  taxRate                  Float
+  description              String?
+  notes                    String?
+  imageUrl                 String
+  transferStockAdjustments TransferStockAdjustment[]
+  addStockAdjustments      AddStockAdjustment[]
+  createdAt                DateTime                  @default(now())
+  updatedAt                DateTime                  @updatedAt
+}
+
+model Category {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  items       Item[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Supplier {
+  id                  String               @id @default(auto()) @map("_id") @db.ObjectId
+  title               String?
+  phone               String?
+  email               String
+  address             String?
+  contactPerson       String?
+  supplierCode        String
+  paymentTerms        String?
+  taxID               String?
+  notes               String?
+  items               Item[]
+  addStockAdjustments AddStockAdjustment[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+}
+
+model Unit {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  abbreviation String?
+  items        Item[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Brand {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  items     Item[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Warehouse {
+  id                  String               @id @default(auto()) @map("_id") @db.ObjectId
+  title               String
+  location            String?
+  description         String?
+  warehouseType       String
+  stockQty            Int                  @default(0)
+  items               Item[]
+  addStockAdjustments AddStockAdjustment[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  // giveStocks          TransferStockAdjustment[] @relation("GiveStocks")
+  // receiveStocks       TransferStockAdjustment[] @relation("ReceiveStocks")
+}
+
+// npx prisma format
+
+model AddStockAdjustment {
+  id                   String    @id @default(auto()) @map("_id") @db.ObjectId
+  addStockQty          Int
+  referenceNumber      String
+  warehouse            Warehouse @relation(fields: [receivingWarehouseId], references: [id], onDelete: Cascade)
+  receivingWarehouseId String    @db.ObjectId
+  notes                String
+  item                 Item      @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  itemId               String    @db.ObjectId
+  supplier             Supplier  @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  supplierId           String    @db.ObjectId
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
+model TransferStockAdjustment {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  referenceNumber      String
+  transferStockQty     Int
+  receivingWarehouseId String   @db.ObjectId
+  givingWarehouseId    String   @db.ObjectId
+  item                 Item     @relation(fields: [itemId], references: [id])
+  itemId               String   @db.ObjectId
+  notes                String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// model TransferStockAdjustment {
+//   id                   String    @id @default(auto()) @map("_id") @db.ObjectId
+//   referenceNumber      String
+//   transferStockQty     Int
+//   giveWarehouse        Warehouse @relation("GiveStocks", fields: [givingWarehouseId], references: [id])
+//   givingWarehouseId    String    @db.ObjectId
+//   receiveWarehouse     Warehouse @relation("ReceiveStocks", fields: [receivingWarehouseId], references: [id])
+//   receivingWarehouseId String    @db.ObjectId
+
+//   item   Item    @relation(fields: [itemId], references: [id])
+//   itemId String  @db.ObjectId
+//   notes  String?
+// }
