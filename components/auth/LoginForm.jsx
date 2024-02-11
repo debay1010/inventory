@@ -34,7 +34,7 @@ const LoginForm = () => {
 		} catch (error) {
 			setLoading(false);
 			console.error("Network Error:", error);
-			toast.error("Something went wrong. Try again later");
+			toast.error("Something went wrong. Please try again later");
 		}
 	}
 	return (
